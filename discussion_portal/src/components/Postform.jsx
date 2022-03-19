@@ -1,6 +1,6 @@
 import { Box, makeStyles, Typography } from "@material-ui/core"
 import { useState } from "react";
-import { addPost } from "./service/api";
+import { addPost } from "./service/api.js";
 
 const useStyles = makeStyles({
     form: {
@@ -9,7 +9,7 @@ const useStyles = makeStyles({
     }
 });
 
-const Postsform = () => {
+const Postsform =  ({setOpenform}) => {
 
     const classes = useStyles();
     const [name, setName] = useState("");
@@ -23,7 +23,10 @@ const Postsform = () => {
             description: description,
             question: question
         }
+        console.log(data);
         await addPost(data);
+        alert("Your Question has been successfully added");
+        setOpenform(false);
     }
     return (
         <Box className={classes.form}>

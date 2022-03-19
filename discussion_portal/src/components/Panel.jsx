@@ -5,7 +5,7 @@ import Header from "./LeftComponent/Header";
 import Search from "./LeftComponent/Search";
 import BlogPost from "./LeftComponent/BlogPost";
 
-const Panel = () => {
+const Panel = ({setOpenform}) => {
 
     const [text,setText] = useState("");
 
@@ -13,7 +13,7 @@ const Panel = () => {
         <>
         <Header />
         <Search setText={setText} />
-        <BlogPost />
+        <BlogPost setOpenform={setOpenform} />
         </>
     )
 }

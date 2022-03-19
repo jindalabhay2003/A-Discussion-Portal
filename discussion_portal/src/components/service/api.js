@@ -13,3 +13,12 @@ export const addPost = async (data)=>{
 
     }
 }
+
+export const getPosts = async ()=>{
+    try{
+        return await axios.get(`${URL}/getPostsArray`);
+    }
+    catch(error){
+        console.log(`Error While calling getUsers Api`,error);
+    }
+}

@@ -1,5 +1,5 @@
 import { Box, makeStyles } from "@material-ui/core";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AccountContext } from "../context/AccountProvider";
 import React from 'react';
 
@@ -7,7 +7,7 @@ import React from 'react';
 import Panel from "./Panel";
 import Postsform from "./Postform";
 import QuestionCard from "./QuestionCard";
-import { maxWidth } from "@mui/system";
+import { maxWidth } from "@material-ui/core";
 
 const useStyles = makeStyles({
 
@@ -30,16 +30,18 @@ const useStyles = makeStyles({
 const MainPage = ()=>{
 
     const {account} = useContext(AccountContext);
+    const [openform ,setOpenform] = useState(false);
     const classes = useStyles();
 
     return(
         <Box className={classes.container} >
             <Box className={classes.leftComponent} >
-                <Panel />
+                <Panel setOpenform={setOpenform} />
             </Box>
             <Box className={classes.rightComponent} >
-                {/* <Postsform /> */}
-                <QuestionCard/>
+                {
+                    openform?<Postsform setOpenform={setOpenform} />:<QuestionCard />
+                }
             </Box>
         </Box>
     )

@@ -3,16 +3,13 @@ import mongoose from "mongoose";
 const newPostsSchema = new mongoose.Schema({
 
     name: {
-        type: String,
-        required: true
+        type: String
     },
     description: {
-        type: String,
-        required: true
+        type: String
     },
     question: {
-        type: String,
-        required: true
+        type: String
     }},
     {
         timestamps: true

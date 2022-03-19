@@ -4,9 +4,9 @@ export const newPost = async (request,response) =>{
 
     try{
 
-        const name = request.body.data.name;
-        const description = request.body.data.description;
-        const question = request.body.data.question;
+        const name = request.body.name;
+        const description = request.body.description;
+        const question = request.body.question;
 
         const newpost = new Post({
             name: name,
