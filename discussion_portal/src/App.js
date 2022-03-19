@@ -1,9 +1,15 @@
 
 import './App.css';
+import Blogs from "./components/Blogs";
+import AccountProvider from "./context/AccountProvider";
 
 function App() {
   return (
-    <p>Hello</p>
+    <div>
+      <AccountProvider>
+        <Blogs />
+      </AccountProvider>
+    </div>
   );
 }
 
