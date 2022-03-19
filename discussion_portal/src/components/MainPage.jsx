@@ -5,7 +5,7 @@ import React from 'react';
 
 // components
 import Panel from "./Panel";
-import Posts from "./Posts";
+import Postsform from "./Postform";
 
 const useStyles = makeStyles({
 
@@ -36,7 +36,7 @@ const MainPage = ()=>{
                 <Panel />
             </Box>
             <Box className={classes.rightComponent} >
-                <Posts />
+                <Postsform />
             </Box>
         </Box>
     )

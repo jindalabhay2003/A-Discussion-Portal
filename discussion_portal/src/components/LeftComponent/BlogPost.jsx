@@ -33,13 +33,13 @@ const BlogPost = ()=>{
             <Box>
                 <Card className={classes.card} >
                     <Typography  >Dhananjay Singh</Typography>
-                    <Typography variant="p" > How to Center a div tag </Typography>
+                    <Typography  > How to Center a div tag </Typography>
                 </Card>
             </Box>
             <Box>
                 <Card className={classes.card} >
                     <Typography  >Dhananjay Singh</Typography>
-                    <Typography variant="p" > How to Center a div..... </Typography>
+                    <Typography  > How to Center a div..... </Typography>
                 </Card>
             </Box>
         </Box>
