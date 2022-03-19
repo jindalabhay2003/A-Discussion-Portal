@@ -6,6 +6,8 @@ import React from 'react';
 // components
 import Panel from "./Panel";
 import Postsform from "./Postform";
+import QuestionCard from "./QuestionCard";
+import { maxWidth } from "@mui/system";
 
 const useStyles = makeStyles({
 
@@ -36,7 +38,8 @@ const MainPage = ()=>{
                 <Panel />
             </Box>
             <Box className={classes.rightComponent} >
-                <Postsform />
+                {/* <Postsform /> */}
+                <QuestionCard/>
             </Box>
         </Box>
     )

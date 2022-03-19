@@ -9,9 +9,9 @@ const useStyles = makeStyles({
     header: {
         height: "35px",
         background: '#ededed',
-        padding: "10px 16px",
+        padding: "30px 16px",
         display: "flex",
-        alignItems: "center"
+        alignItems: "center",
     },
     imaclass: {
         height: "37px",

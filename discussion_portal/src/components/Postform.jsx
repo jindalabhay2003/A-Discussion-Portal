@@ -1,10 +1,11 @@
-import { Box, makeStyles } from "@material-ui/core"
+import { Box, makeStyles, Typography } from "@material-ui/core"
 import { useState } from "react";
 import { addPost } from "./service/api";
 
 const useStyles = makeStyles({
     form: {
         height: '100vh',
+        padding:"10px",
     }
 });
 
@@ -27,6 +28,7 @@ const Postsform = () => {
     return (
         <Box className={classes.form}>
             <form onSubmit={formSubmitHandler} >
+                <Typography variant="h4" align="center">Post your doubt</Typography>
                 <div className={'mb-3'}>
                     <label  className={'form-label'}>Name</label>
                     <input type="text" className={'form-control'} placeholder="Your Name" onChange={(e)=>{setName(e.target.value)}} />

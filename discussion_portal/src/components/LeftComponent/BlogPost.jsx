@@ -32,7 +32,7 @@ const BlogPost = ()=>{
     return (
         <Box className={classes.container} >
             <Box style={{width: '100%'}} >
-                <Button style={{width: "90%",margin:"5% 5% 0 5% "}} variant="contained" color="primary" >Create New Post</Button>
+                <Button style={{width: "90%",margin:"5%"}} variant="contained" color="primary" >Create New Post</Button>
             </Box>
             <Box className={classes.Recent} >
                <h4>Timeline</h4>  

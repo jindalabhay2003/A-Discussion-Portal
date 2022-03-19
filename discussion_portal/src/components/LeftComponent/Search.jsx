@@ -3,7 +3,7 @@ import { Search as SearchIcon } from '@material-ui/icons';
 
 const useStyles = makeStyles( theme=> ({
     component: {
-        background: "#F6F6F6",
+        background: "#dce9fa91",
         height: 43,
         display: 'flex',
         alignItems: 'center'
@@ -12,7 +12,7 @@ const useStyles = makeStyles( theme=> ({
         position: 'relative',
         borderRadius: 18,
         backgroundColor: '#FFFFFF',
-        margin: "0px 13px",
+        margin: "10px 13px",
         width: '100%'
       },
         searchIcon: {
