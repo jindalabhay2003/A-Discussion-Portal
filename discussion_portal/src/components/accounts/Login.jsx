@@ -56,7 +56,7 @@ const Login = ({classes}) =>{
         const email = res.profileObj.email;
         const length  = parseInt(email.length);
         if(length> 12 && email.slice(length-12,length) === "iitbbs.ac.in"){
-            // setAccount(res.profileObj);
+            setAccount(res.profileObj);
         }
         else{
             alert("Please Log in with your IITBBS email Id");

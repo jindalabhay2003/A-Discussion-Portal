@@ -31,13 +31,14 @@ const Blogs = () => {
     const {account} = useContext(AccountContext);
 
     return (
+        <Box>
+            {
+                account?<MainPage />:
+           
         <Box className={classes.container}>
-         <React.Fragment>
-        {/* <AppBar className={account?classes.Header:classes.loginHeader} >
-            <Toolbar  ></Toolbar>
-        </AppBar> */}
-        {account?<MainPage />:<Login />}
-        </React.Fragment>
+        <Login />
+        </Box>
+        }
         </Box>
 
     )
