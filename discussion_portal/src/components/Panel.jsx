@@ -1,10 +1,20 @@
-import { Box } from "@material-ui/core"
+import { useState } from "react";
 
-const Panel = ()=>{
+// components
+import Header from "./LeftComponent/Header";
+import Search from "./LeftComponent/Search";
+import BlogPost from "./LeftComponent/BlogPost";
+
+const Panel = () => {
+
+    const [text,setText] = useState("");
+
     return (
-        <Box>
-            Hello PAnels
-        </Box>
+        <>
+        <Header />
+        <Search setText={setText} />
+        <BlogPost />
+        </>
     )
 }
 

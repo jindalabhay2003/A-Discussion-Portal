@@ -13,11 +13,11 @@ const useStyles = makeStyles({
         display: 'flex'
     },
     leftComponent: {
-        width: '35%',
+        width: '30%',
         height: '100vh'
     },
     rightComponent: {
-        width: '65%',
+        width: '70%',
         height: '100vh',
         borderLeft: '1px solid black'
     }
