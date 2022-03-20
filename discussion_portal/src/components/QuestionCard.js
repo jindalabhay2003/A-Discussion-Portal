@@ -6,7 +6,13 @@ import {
   Button,
   Input,
 } from "@material-ui/core";
-import React from "react";
+import React, { useState } from "react";
+
+import { useContext,useEffect } from "react";
+import { AccountContext } from "../context/AccountProvider";
+import { setReply } from "./service/api";
+import { getPosts } from "./service/api";
+import { getSelectedPost } from "./service/api";
 
 const usestyles = makeStyles({
   card: {
@@ -20,24 +26,39 @@ const usestyles = makeStyles({
 });
 
 const QuestionCard = (props) => {
+
+  const {account,selectedPost,setselectedPost} = useContext(AccountContext);
+  const [userReply,setUserReply] = useState("");
+  const [isreply,setIsreply] = useState(true);
+  console.log(selectedPost);
+
+  const replyButtonClick = async (event)=>{
+    event.preventDefault();
+    const data = {
+      postid: selectedPost._id,
+      name: account.name,
+      message: userReply
+    }
+    await setReply(data);
+
+    var check = isreply?false:true;
+
+    setIsreply(check);
+    console.log("Chanes");
+  }
+
+
   const classes = usestyles();
   return (
     <Box>
-      <Card className={classes.card} elevation={0}>
+      {
+       selectedPost && <Card className={classes.card} elevation={0}>
         <Typography variant="h5" color="primary">
-          Description of Question
+          {/* Description of Question */}{selectedPost.description}
         </Typography>
-        <Typography variant="h6">By Panda Garg</Typography>
+        <Typography variant="h6">{"By " + selectedPost.name}</Typography>
         <Typography variant="p">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged. It was popularised in the 1960s with
-          the release of Letraset sheets containing Lorem Ipsum passages, and
-          more recently with desktop publishing software like Aldus PageMaker
-          including versions of Lorem Ipsum.
+          {selectedPost.question}
         </Typography>
         <Card
           className={classes.card}
@@ -57,14 +78,41 @@ const QuestionCard = (props) => {
             disableUnderline
             multiline
             fullWidth
+            onChange={(e)=>{e.preventDefault();setUserReply(e.target.value)}}
           />
+          <Button onClick={replyButtonClick} variant="contained" style={{marginLeft:'10px'}} className={classes.button}>
+            Send
+          </Button>
         </Card>
         <Card
           className={classes.card}
           style={{ maxHeight: "300px", overflow: "scroll" }}
           elevation={0}
         >
-          <Box>
+            {selectedPost.replies.map((reply)=>(
+              <Box>
+             <Typography variant="h6" color="primary">
+              Reply By {reply.name}
+            </Typography>
+            <Typography variant="p">
+              {reply.message}
+            </Typography>
+            </Box>
+            ))
+            }
+            {/* <Box>
+            <Typography variant="h6" color="primary">
+              Reply by Chirag Jindal
+            </Typography>
+            <Typography variant="p">
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry's standard dummy text
+              ever since the 1500s, when an unknown printer took a galley of
+              type and scrambled it to make a type specimen book. It has
+              survived not only
+            </Typography>
+          </Box> */}
+          {/* <Box>
             <Typography variant="h6" color="primary">
               Reply by Chirag Jindal
             </Typography>
@@ -99,21 +147,11 @@ const QuestionCard = (props) => {
               type and scrambled it to make a type specimen book. It has
               survived not only
             </Typography>
-          </Box>
-          <Box>
-            <Typography variant="h6" color="primary">
-              Reply by Chirag Jindal
-            </Typography>
-            <Typography variant="p">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only
-            </Typography>
-          </Box>
+          </Box> */}
         </Card>
+      
       </Card>
+      }
     </Box>
   );
 };

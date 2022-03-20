@@ -22,3 +22,17 @@ export const newPost = async (request,response) =>{
         response.status(500).json(error);
     }
 }
+
+export const newSelectedPost = async (request,response)=>{
+
+    try{
+        const id  = request.body;
+
+        const post =  await Post.findOne({_id: id});
+
+        response.status(200).json(post);
+    }
+    catch(error){
+        response.status(500).json(error);
+    }
+}

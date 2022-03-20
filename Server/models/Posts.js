@@ -10,6 +10,9 @@ const newPostsSchema = new mongoose.Schema({
     },
     question: {
         type: String
+    },
+    replies:{
+        type: Array
     }},
     {
         timestamps: true

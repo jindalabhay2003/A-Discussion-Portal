@@ -2,6 +2,7 @@ import { Box, makeStyles, Card, Typography,Button } from "@material-ui/core";
 import { textAlign } from "@material-ui/core";
 import { useState, useEffect ,useContext } from "react";
 import { getPosts } from "../service/api";
+import { AccountContext } from "../../context/AccountProvider";
 
 const useStyles = makeStyles({
     container:{
@@ -32,6 +33,7 @@ const BlogPost = ({setOpenform})=>{
 
     const [postArray, setpostArray] = useState([]);
     const classes = useStyles();
+    const {selectedPost,setselectedPost} = useContext(AccountContext);
 
     useEffect(()=>{
 
@@ -42,6 +44,13 @@ const BlogPost = ({setOpenform})=>{
         getPostsArray();
 
     },[]);
+
+    const newdiscussionClickHandler = (event,post)=>{
+        event.preventDefault();
+        setOpenform(false);
+        console.log("Hi",post);
+        setselectedPost(post);
+    }
 
     return (
         <Box className={classes.container} >
@@ -57,7 +66,7 @@ const BlogPost = ({setOpenform})=>{
                     <Card className={classes.card} >
                     <Typography style={{fontWeight:"700"}}>{post.name}</Typography>
                     <Typography variant="p"> {post.description} </Typography>
-                    <Button variant="contained" color="primary" className={classes.button}>Enter Discussion</Button>
+                    <Button variant="contained" color="primary" className={classes.button} onClick={(e)=>{e.preventDefault();setselectedPost(post);}} >Enter Discussion</Button>
                    </Card>
                     ))
                 }

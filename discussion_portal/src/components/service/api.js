@@ -22,3 +22,21 @@ export const getPosts = async ()=>{
         console.log(`Error While calling getUsers Api`,error);
     }
 }
+
+export const setReply = async (data)=>{
+    try{
+        return await axios.post(`${URL}/setReply`,data);
+    }
+    catch(error){
+        console.log(`Error While calling setReply Api `,error);
+    }
+}
+
+export const getSelectedPost = async (data)=>{
+    try{
+        return await axios.post(`${URL}/getSelectedPost`,data);
+    }
+    catch(error){
+        console.log(`Error While calling getSelectedPost Api `,error);
+    }
+}
