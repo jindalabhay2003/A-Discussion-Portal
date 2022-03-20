@@ -40,3 +40,31 @@ export const getSelectedPost = async (data)=>{
         console.log(`Error While calling getSelectedPost Api `,error);
     }
 }
+
+export const addBlacklist = async(data)=>{
+    try{
+        return await axios.post(`${URL}/addBlacklist`,data);
+    }
+    catch(error){
+        console.log(`Error While calling addBlacklist Api`,error);
+    }
+}
+
+export const addBlocklist = async(data)=>{
+    try{
+        return await axios.post(`${URL}/addBlocklist`,data);
+    }
+    catch(error){
+        console.log(`Error While calling addBlocklist Api`,error);
+    }
+}
+
+export const GetBlocked  = async ()=>{
+    try{
+        return await axios.get(`${URL}/GetBlocked`);
+    }
+    catch(error){
+        console.log(`Error While calling GetBlocked Api`,error);
+    }
+}
+

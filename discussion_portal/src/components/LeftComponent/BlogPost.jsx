@@ -1,7 +1,7 @@
 import { Box, makeStyles, Card, Typography,Button } from "@material-ui/core";
 import { textAlign } from "@material-ui/core";
 import { useState, useEffect ,useContext } from "react";
-import { getPosts } from "../service/api";
+import { getPosts,addBlacklist,addBlocklist } from "../service/api";
 import { AccountContext } from "../../context/AccountProvider";
 
 const useStyles = makeStyles({
@@ -25,6 +25,10 @@ const useStyles = makeStyles({
     },
     button: {
         margin: "10px"
+    },
+    block:{
+        maxHeight: '500px',
+        overflow: 'scroll'
     }
 
 })
@@ -33,7 +37,7 @@ const BlogPost = ({setOpenform})=>{
 
     const [postArray, setpostArray] = useState([]);
     const classes = useStyles();
-    const {selectedPost,setselectedPost} = useContext(AccountContext);
+    const {selectedPost,setselectedPost,isAdmin} = useContext(AccountContext);
 
     useEffect(()=>{
 
@@ -60,14 +64,20 @@ const BlogPost = ({setOpenform})=>{
             <Box className={classes.Recent} >
                <h4>Timeline</h4>  
             </Box>
-            <Box>
+            <Box className={classes.block} >
                 {
                     postArray && postArray.map((post)=>(
+                     post.Blacklist&&!isAdmin?null:   
                     <Card className={classes.card} >
                     <Typography style={{fontWeight:"700"}}>{post.name}</Typography>
                     <Typography variant="p"> {post.description} </Typography>
-                    <Button variant="contained" color="primary" className={classes.button} onClick={(e)=>{e.preventDefault();setselectedPost(post);}} >Enter Discussion</Button>
+                    <Button variant="contained" color="primary" className={classes.button} onClick={(e)=>{e.preventDefault();setselectedPost(post);setOpenform(false)}} >Enter Discussion</Button>
+                    {isAdmin?<Button variant="contained" color="primary" className={classes.button} onClick={async(e)=>{e.preventDefault(); await addBlacklist(post);}
+                    } >{post.Blacklist?"Whitelist":"Blacklist"}</Button>:null}
+                    {isAdmin?<Button variant="contained" color="primary" className={classes.button} onClick={async(e)=>{e.preventDefault(); await addBlocklist(post);}
+                    } >{post.Blocked?"UnBlock":"Block"}</Button>:null}
                    </Card>
+                    
                     ))
                 }
             </Box>

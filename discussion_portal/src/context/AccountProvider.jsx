@@ -7,6 +7,7 @@ const AccountProvider = ({children}) => {
 
     const [account, setAccount] = useState();
     const [selectedPost, setselectedPost] = useState();
+    const [isAdmin,setIsAdmin] = useState(false);
 
     return (
        < AccountContext.Provider
@@ -15,7 +16,9 @@ const AccountProvider = ({children}) => {
         account,
         setAccount,
         selectedPost,
-        setselectedPost
+        setselectedPost,
+        isAdmin,
+        setIsAdmin
        }} >
            {children}
        </AccountContext.Provider>

@@ -1,7 +1,8 @@
 import { Dialog, withStyles,Box,Typography,makeStyles,List,ListItem } from "@material-ui/core";
 import {GoogleLogin} from 'react-google-login';
-import { useContext } from "react";
+import { useContext,useState } from "react";
 import { AccountContext } from "../../context/AccountProvider";
+import {GetBlocked} from "../service/api.js"
 
 const useStyles = makeStyles({
     Component: {
@@ -38,13 +39,37 @@ const Style = {
     }
 }
 
+const getUsers = async (setUsers)=>{
+    
+    let val = await GetBlocked();
+    // setBlockedUsers(data.data);
+    // console.log("Hi",data.data);
+    // console.log("Chiragh");
+    setUsers(val.data)
+
+}
 
 const Login = ({classes}) =>{
 
+    const [users,setUsers] = useState([]);
+    getUsers(setUsers);
+
+    users && users.map(user=>(
+        console.log(user.email)
+    ))
+    
+    
     const className = useStyles();
     const clientID = '1032742189652-sodupvqpblrb8i8rcsu4f19ro5et1sg9.apps.googleusercontent.com';
 
-    const {account, setAccount} = useContext(AccountContext);
+    const {account, setAccount,isAdmin,setIsAdmin} = useContext(AccountContext);
+
+    const [isBlocked,setBlocked] = useState(false);
+
+    users && users.map(user=>(
+        account.email==user.email?setBlocked(true):null
+    ))
+
 
     // This will called when google authentication is succesfully done
     const onLoginSuccess = async (res) =>{
@@ -55,8 +80,17 @@ const Login = ({classes}) =>{
 
         const email = res.profileObj.email;
         const length  = parseInt(email.length);
-        if(length> 12 && email.slice(length-12,length) === "iitbbs.ac.in"){
+
+        if(isBlocked){
+            alert("You are Blocked, Try to contact admin");
+        }
+        else if(email == "abhayjindal408@gmail.com"){
             setAccount(res.profileObj);
+            setIsAdmin(true);
+        }
+        else if(length> 12 && email.slice(length-12,length) === "iitbbs.ac.in"){
+            setAccount(res.profileObj);
+            setIsAdmin(false);
         }
         else{
             alert("Please Log in with your IITBBS email Id");

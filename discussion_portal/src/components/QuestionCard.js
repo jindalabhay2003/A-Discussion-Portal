@@ -30,22 +30,36 @@ const QuestionCard = (props) => {
   const {account,selectedPost,setselectedPost} = useContext(AccountContext);
   const [userReply,setUserReply] = useState("");
   const [isreply,setIsreply] = useState(true);
-  console.log(selectedPost);
+  const [reps,setreps] = useState([]);
+  
+  
 
-  const replyButtonClick = async (event)=>{
+  const replyButtonClick =  (event)=>{
     event.preventDefault();
     const data = {
       postid: selectedPost._id,
       name: account.name,
       message: userReply
     }
-    await setReply(data);
+    let temp = {
+      name: account.name,
+      message: userReply
+    }
+    console.log(temp);
+    setReply(data);
 
-    var check = isreply?false:true;
 
-    setIsreply(check);
-    console.log("Chanes");
+    selectedPost.replies.push(temp);
+    console.log(selectedPost.replies);
+
+    setIsreply(!isreply);
+    
+      
   }
+
+  useEffect(()=>{ 
+
+  },[isreply]);
 
 
   const classes = usestyles();
@@ -71,6 +85,7 @@ const QuestionCard = (props) => {
           <Button variant="contained" className={classes.button}>
             Downvote
           </Button>
+          <form>
           <input
             type="text"
             placeholder="Reply..."
@@ -80,9 +95,11 @@ const QuestionCard = (props) => {
             fullWidth
             onChange={(e)=>{e.preventDefault();setUserReply(e.target.value)}}
           />
-          <Button onClick={replyButtonClick} variant="contained" style={{marginLeft:'10px'}} className={classes.button}>
+          <Button onClick={replyButtonClick} type="submit" variant="contained" style={{marginLeft:'10px'}} className={classes.button}>
             Send
           </Button>
+          
+          </form>
         </Card>
         <Card
           className={classes.card}

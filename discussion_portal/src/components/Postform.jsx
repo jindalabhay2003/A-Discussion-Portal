@@ -1,6 +1,7 @@
 import { Box, makeStyles, Typography } from "@material-ui/core"
-import { useState } from "react";
+import { useState,useContext } from "react";
 import { addPost } from "./service/api.js";
+import { AccountContext } from "../context/AccountProvider.jsx";
 
 const useStyles = makeStyles({
     form: {
@@ -15,13 +16,15 @@ const Postsform =  ({setOpenform}) => {
     const [name, setName] = useState("");
     const [description,setDescription] = useState("");
     const [question,setQuestion] = useState("");
+    const {account} = useContext(AccountContext);
 
     const formSubmitHandler = async (event)=>{
         event.preventDefault();
         const data= {
-            name: name,
+            name: account.name,
             description: description,
-            question: question
+            question: question,
+            email: account.email
         }
         console.log(data);
         await addPost(data);
@@ -32,10 +35,10 @@ const Postsform =  ({setOpenform}) => {
         <Box className={classes.form}>
             <form onSubmit={formSubmitHandler} >
                 <Typography variant="h4" align="center">Post your doubt</Typography>
-                <div className={'mb-3'}>
+                {/* <div className={'mb-3'}>
                     <label  className={'form-label'}>Name</label>
                     <input type="text" className={'form-control'} placeholder="Your Name" onChange={(e)=>{setName(e.target.value)}} />
-                </div>
+                </div> */}
                 <div className={'mb-3'}>
                     <label className={'form-label'}>Description</label>
                     <input type="text" className={'form-control'} required placeholder="Description" onChange={(e)=>{setDescription(e.target.value)}} />
