@@ -51,12 +51,13 @@ const getUsers = async (setUsers)=>{
 
 const Login = ({classes}) =>{
 
-    const [users,setUsers] = useState([]);
+    const [users,setUsers] = useState(null);
     getUsers(setUsers);
 
     users && users.map(user=>(
         console.log(user.email)
     ))
+
     
     
     const className = useStyles();
@@ -65,10 +66,21 @@ const Login = ({classes}) =>{
     const {account, setAccount,isAdmin,setIsAdmin} = useContext(AccountContext);
 
     const [isBlocked,setBlocked] = useState(false);
+    let isBlock = false;
 
-    users && users.map(user=>(
-        account.email==user.email?setBlocked(true):null
-    ))
+    // users && users.map(user=>(
+    //     isBlock =  account.email===user.email?true:false
+    // ))
+    // for(var i=0;i<users.length;i++){
+    //     if(users[i].email === account.email){
+    //         isBlock = true;
+    //         break;
+    //     }
+    // }
+    // console.log(users);
+    // users && users.map((user)=>(
+    //     account.email==user.email?setBlocked(true):true
+    // ));
 
 
     // This will called when google authentication is succesfully done
@@ -76,15 +88,15 @@ const Login = ({classes}) =>{
         // Google provides us this res object which contains some data about us 
         // console.log("Login Succesful", res.profileObj);
         // setAccount(res.profileObj);
-        console.log(res.profileObj);
+        // console.log(res.profileObj);
 
         const email = res.profileObj.email;
         const length  = parseInt(email.length);
 
-        if(isBlocked){
+        if(isBlock){
             alert("You are Blocked, Try to contact admin");
         }
-        else if(email == "abhayjindal408@gmail.com"){
+        else if(email === "abhayjindal408@gmail.com"){
             setAccount(res.profileObj);
             setIsAdmin(true);
         }

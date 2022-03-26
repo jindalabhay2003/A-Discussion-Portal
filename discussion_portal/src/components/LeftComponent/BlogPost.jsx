@@ -33,7 +33,7 @@ const useStyles = makeStyles({
 
 })
 
-const BlogPost = ({setOpenform})=>{
+const BlogPost = ({open,setopen,setOpenform})=>{
 
     const [postArray, setpostArray] = useState([]);
     const classes = useStyles();
@@ -47,7 +47,11 @@ const BlogPost = ({setOpenform})=>{
         }
         getPostsArray();
 
-    },[]);
+    },[open]);
+
+    useEffect(()=>{
+        // window.BeforeUnloadEvent()
+    },[open]);
 
     const newdiscussionClickHandler = (event,post)=>{
         event.preventDefault();
@@ -67,13 +71,12 @@ const BlogPost = ({setOpenform})=>{
             <Box className={classes.block} >
                 {
                     postArray && postArray.map((post)=>(
-                     post.Blacklist&&!isAdmin?null:   
+                     post.Blacklist&&!isAdmin?<></>:   
                     <Card className={classes.card} >
                     <Typography style={{fontWeight:"700"}}>{post.name}</Typography>
                     <Typography variant="p"> {post.description} </Typography>
                     <Button variant="contained" color="primary" className={classes.button} onClick={(e)=>{e.preventDefault();setselectedPost(post);setOpenform(false)}} >Enter Discussion</Button>
-                    {isAdmin?<Button variant="contained" color="primary" className={classes.button} onClick={async(e)=>{e.preventDefault(); await addBlacklist(post);}
-                    } >{post.Blacklist?"Whitelist":"Blacklist"}</Button>:null}
+                    {isAdmin?<Button variant="contained" color="primary" className={classes.button} onClick={async(e)=>{e.preventDefault(); await addBlacklist(post)}} >{post.Blacklist?"Whitelist":"Blacklist"}</Button>:null}
                     {isAdmin?<Button variant="contained" color="primary" className={classes.button} onClick={async(e)=>{e.preventDefault(); await addBlocklist(post);}
                     } >{post.Blocked?"UnBlock":"Block"}</Button>:null}
                    </Card>

@@ -31,16 +31,17 @@ const MainPage = ()=>{
 
     const {account} = useContext(AccountContext);
     const [openform ,setOpenform] = useState(false);
+    const [open,setopen] = useState(false);
     const classes = useStyles();
 
     return(
         <Box className={classes.container} >
             <Box className={classes.leftComponent} >
-                <Panel setOpenform={setOpenform} />
+                <Panel open={open} setopen={setopen} setOpenform={setOpenform} />
             </Box>
             <Box className={classes.rightComponent} >
                 {
-                    openform?<Postsform setOpenform={setOpenform} />:<QuestionCard />
+                    openform?<Postsform open={open} setopen={setopen} setOpenform={setOpenform} />:<QuestionCard />
                 }
             </Box>
         </Box>

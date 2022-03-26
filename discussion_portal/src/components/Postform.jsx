@@ -10,7 +10,7 @@ const useStyles = makeStyles({
     }
 });
 
-const Postsform =  ({setOpenform}) => {
+const Postsform =  ({open,setopen,setOpenform}) => {
 
     const classes = useStyles();
     const [name, setName] = useState("");
@@ -29,7 +29,7 @@ const Postsform =  ({setOpenform}) => {
         console.log(data);
         await addPost(data);
         alert("Your Question has been successfully added");
-        setOpenform(false);
+        setopen(!open);
     }
     return (
         <Box className={classes.form}>
