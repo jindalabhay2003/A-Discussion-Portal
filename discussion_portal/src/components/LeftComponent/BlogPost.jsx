@@ -49,15 +49,35 @@ const BlogPost = ({open,setopen,setOpenform})=>{
 
     },[open]);
 
-    useEffect(()=>{
-        // window.BeforeUnloadEvent()
-    },[open]);
-
     const newdiscussionClickHandler = (event,post)=>{
         event.preventDefault();
         setOpenform(false);
         console.log("Hi",post);
         setselectedPost(post);
+    }
+
+    
+    var result = Object.keys(postArray).map((key) => [postArray[key]]);
+
+    var result2 = [];
+    result.forEach(item =>{
+        result2.push(item[0]);
+        var date  = new Date(item[0].updatedAt);
+        console.log(date.getTime());
+    });
+
+    // Bubble sort = O(N*2)
+    for(var i=0;i<result2.length;i++){
+        for(var j= i+1;j<result2.length;j++){
+            var a = new Date(result2[i].updatedAt);
+            a = a.getTime();
+            var b = new Date(result2[j].updatedAt);
+            b = b.getTime();
+
+            if(b>a){
+                [result2[i],result2[j]] = [result2[j],result2[i]];
+            }
+        }
     }
 
     return (
@@ -70,7 +90,7 @@ const BlogPost = ({open,setopen,setOpenform})=>{
             </Box>
             <Box className={classes.block} >
                 {
-                    postArray && postArray.map((post)=>(
+                    result2 && result2.map((post)=>(
                      post.Blacklist&&!isAdmin?<></>:   
                     <Card className={classes.card} >
                     <Typography style={{fontWeight:"700"}}>{post.name}</Typography>
