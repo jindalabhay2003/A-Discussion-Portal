@@ -19,7 +19,7 @@ Our purpose to make this project is to maintain a blog application limited to an
 
 - Limited to an Specific organisation Only
 - We can write as Many blogs as we want
-- Blogs ae sorted according to most recently changed time
+- Blogs are sorted according to most recently changed time
 - A admin is there who can remove any blog 
 - A admin can blacklist/Whitelist any user
 - Anyone can comment on any blog
